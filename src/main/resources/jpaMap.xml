@@ -1,0 +1,2057 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="net.app.models.TypeCosmetic">
+        <table name="type_cosmetic" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="image">
+                <column name="image" nullable="false" precision="-1"/>
+            </basic>
+            <one-to-many name="collectionsById" mapped-by="typeCosmeticByIdTypecosmetic"
+                         target-entity="net.app.models2.Collections"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Agency">
+        <table name="agency" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone" nullable="false"/>
+            </basic>
+            <basic name="createDate">
+                <column name="create_date" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyers">
+        <table name="buyers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="usersByKodUser" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="kod_user" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Card">
+        <table name="card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="buyersByIdBuyer" optional="true" target-entity="net.app.models2.Buyers">
+                <join-column name="id_buyer" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.CardService">
+        <table name="card_service" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <many-to-one name="cardByIdCard" optional="true" target-entity="net.app.models2.Card">
+                <join-column name="id_card" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Collections">
+        <table name="collections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <many-to-one name="agencyByIdAgency" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_agency" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Costs">
+        <table name="costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="summ">
+                <column name="summ" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.EmplPost">
+        <table name="empl_post" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <many-to-one name="costsByIdPost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_post" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdEmpl" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_empl" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Pictures">
+        <table name="pictures" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="image">
+                <column name="Image" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="Name" nullable="false" length="45"/>
+            </basic>
+            <basic name="count">
+                <column name="Count" nullable="false" precision="11"/>
+            </basic>
+            <basic name="description">
+                <column name="Description" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="10"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Roles">
+        <table name="roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="100"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Services">
+        <table name="services" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Store">
+        <table name="store" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.TypeCosmetic">
+        <table name="type_cosmetic" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="image">
+                <column name="image" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.UserRoles">
+        <table name="user_roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <many-to-one name="usersByUserId" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="user_id" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="rolesByRoleId" optional="true" target-entity="net.app.models2.Roles">
+                <join-column name="role_id" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Users">
+        <table name="users" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="username">
+                <column name="username"/>
+            </basic>
+            <basic name="password">
+                <column name="password"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Agencycosts">
+        <table name="agencycosts" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="sum">
+                <column name="Sum" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.BalanceOfRepresentations">
+        <table name="balance of representations" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="sum">
+                <column name="Sum" nullable="false" precision="32"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyerscollections">
+        <table name="buyerscollections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="фио">
+                <column name="ФИО" nullable="false"/>
+            </basic>
+            <basic name="дисконт">
+                <column name="Дисконт" nullable="false"/>
+            </basic>
+            <basic name="пол">
+                <column name="Пол" nullable="false"/>
+            </basic>
+            <basic name="датаРождения">
+                <column name="Дата рождения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="адрессРегистрации">
+                <column name="Адресс регистрации" nullable="false"/>
+            </basic>
+            <basic name="суммаНакопленная">
+                <column name="Сумма накопленная" nullable="false" precision="11"/>
+            </basic>
+            <basic name="датаПолучения">
+                <column name="Дата получения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="наименование">
+                <column name="Наименование" nullable="false"/>
+            </basic>
+            <basic name="адресс">
+                <column name="Адресс" nullable="false"/>
+            </basic>
+            <basic name="телефон">
+                <column name="Телефон" nullable="false"/>
+            </basic>
+            <basic name="датаОснования">
+                <column name="Дата основания" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="номер">
+                <column name="Номер" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.IncomesOfRepresentativeOffices">
+        <table name="incomes of representative offices" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="наименование">
+                <column name="Наименование" nullable="false"/>
+            </basic>
+            <basic name="суммаУслуги">
+                <column name="сумма услуги" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Popularcollection">
+        <table name="popularcollection" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="названиеУслуги">
+                <column name="Название услуги" nullable="false"/>
+            </basic>
+            <basic name="countКод">
+                <column name="Count-Код" precision="21"/>
+            </basic>
+            <basic name="фио">
+                <column name="ФИО" nullable="false"/>
+            </basic>
+            <basic name="дисконт">
+                <column name="Дисконт" nullable="false"/>
+            </basic>
+            <basic name="пол">
+                <column name="Пол" nullable="false"/>
+            </basic>
+            <basic name="датаРождения">
+                <column name="Дата рождения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="адрессРегистрации">
+                <column name="Адресс регистрации" nullable="false"/>
+            </basic>
+            <basic name="суммаНакопленная">
+                <column name="Сумма накопленная" nullable="false" precision="11"/>
+            </basic>
+            <basic name="номер">
+                <column name="Номер" precision="11"/>
+            </basic>
+            <basic name="датаПоставки">
+                <column name="Дата поставки" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="датаПолучения">
+                <column name="Дата получения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="описание">
+                <column name="Описание" nullable="false"/>
+            </basic>
+            <basic name="тип">
+                <column name="Тип" nullable="false" precision="11"/>
+            </basic>
+            <basic name="кодМагазина">
+                <column name="Код магазина" nullable="false" precision="11"/>
+            </basic>
+            <basic name="кодУслуги">
+                <column name="КодУслуги" nullable="false" precision="11"/>
+            </basic>
+            <basic name="наименование">
+                <column name="Наименование" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.PurchaseCosts">
+        <table name="purchase costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <basic name="servicesId">
+                <column name="services_id" precision="11"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="cardId">
+                <column name="card_id" precision="11"/>
+            </basic>
+            <basic name="idBuyer">
+                <column name="id_buyer" nullable="false" precision="11"/>
+            </basic>
+            <basic name="cardIdStore">
+                <column name="card_id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="idTypecosmetic">
+                <column name="id_typecosmetic" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idAgency">
+                <column name="id_agency" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.ReportProfitToCustomers">
+        <table name="report profit to customers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="фио">
+                <column name="ФИО" nullable="false"/>
+            </basic>
+            <basic name="суммаServices">
+                <column name="Сумма services" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.ServiceCard">
+        <table name="service_card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="кодКарточки">
+                <column name="Код карточки" nullable="false" precision="11"/>
+            </basic>
+            <basic name="названиеУслуги">
+                <column name="Название услуги" nullable="false"/>
+            </basic>
+            <basic name="ценаУслуги">
+                <column name="Цена услуги" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Turpogos">
+        <table name="turpogos" schema="cosmetics" catalog=""/>
+    </entity>
+    <entity class="net.app.models2.Agency">
+        <table name="agency" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone" nullable="false"/>
+            </basic>
+            <basic name="createDate">
+                <column name="create_date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="idCost">
+                <column name="id_cost" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="costsByIdCost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_cost" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="collectionsById" mapped-by="agencyByIdAgency"
+                         target-entity="net.app.models2.Collections"/>
+            <one-to-many name="emplPostsById" mapped-by="agencyByIdEmpl" target-entity="net.app.models2.EmplPost"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyers">
+        <table name="buyers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+            <basic name="kodUser">
+                <column name="kod_user" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="usersByKodUser" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="kod_user" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardsById" mapped-by="buyersByIdBuyer" target-entity="net.app.models2.Card"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Card">
+        <table name="card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idBuyer">
+                <column name="id_buyer" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="buyersByIdBuyer" optional="true" target-entity="net.app.models2.Buyers">
+                <join-column name="id_buyer" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="collectionsByIdStore" optional="true" target-entity="net.app.models2.Collections">
+                <join-column name="id_store" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardServicesById" mapped-by="cardByIdCard" target-entity="net.app.models2.CardService"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.CardService">
+        <table name="card_service" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idCard">
+                <column name="id_card" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="cardByIdCard" optional="true" target-entity="net.app.models2.Card">
+                <join-column name="id_card" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="servicesByIdService" optional="true" target-entity="net.app.models2.Services">
+                <join-column name="id_service" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Collections">
+        <table name="collections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="idTypecosmetic">
+                <column name="id_typecosmetic" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idAgency">
+                <column name="id_agency" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="typeCosmeticByIdTypecosmetic" optional="true"
+                         target-entity="net.app.models2.TypeCosmetic">
+                <join-column name="id_typecosmetic" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="storeByIdStore" optional="true" target-entity="net.app.models2.Store">
+                <join-column name="id_store" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdAgency" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_agency" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardsById" mapped-by="collectionsByIdStore" target-entity="net.app.models2.Card"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Costs">
+        <table name="costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="summ">
+                <column name="summ" nullable="false" precision="11"/>
+            </basic>
+            <one-to-many name="agenciesById" mapped-by="costsByIdCost" target-entity="net.app.models2.Agency"/>
+            <one-to-many name="emplPostsById" mapped-by="costsByIdPost" target-entity="net.app.models2.EmplPost"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.EmplPost">
+        <table name="empl_post" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idPost">
+                <column name="id_post" precision="11"/>
+            </basic>
+            <basic name="idEmpl">
+                <column name="id_empl" precision="11"/>
+            </basic>
+            <many-to-one name="costsByIdPost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_post" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdEmpl" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_empl" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Pictures">
+        <table name="pictures" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="image">
+                <column name="Image" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="Name" nullable="false" length="45"/>
+            </basic>
+            <basic name="count">
+                <column name="Count" nullable="false" precision="11"/>
+            </basic>
+            <basic name="description">
+                <column name="Description" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="10"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Roles">
+        <table name="roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="100"/>
+            </basic>
+            <one-to-many name="userRolesById" mapped-by="rolesByRoleId" target-entity="net.app.models2.UserRoles"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Services">
+        <table name="services" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <one-to-many name="cardServicesById" mapped-by="servicesByIdService"
+                         target-entity="net.app.models2.CardService"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Store">
+        <table name="store" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <one-to-many name="collectionsById" mapped-by="storeByIdStore" target-entity="net.app.models2.Collections"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.TypeCosmetic">
+        <table name="type_cosmetic" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="image">
+                <column name="image" nullable="false" precision="-1"/>
+            </basic>
+            <one-to-many name="collectionsById" mapped-by="typeCosmeticByIdTypecosmetic"
+                         target-entity="net.app.models2.Collections"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.UserRoles">
+        <table name="user_roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="userId">
+                <column name="user_id" precision="11"/>
+            </basic>
+            <basic name="roleId">
+                <column name="role_id" precision="11"/>
+            </basic>
+            <many-to-one name="usersByUserId" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="user_id" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="rolesByRoleId" optional="true" target-entity="net.app.models2.Roles">
+                <join-column name="role_id" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Users">
+        <table name="users" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="username">
+                <column name="username"/>
+            </basic>
+            <basic name="password">
+                <column name="password"/>
+            </basic>
+            <one-to-many name="buyersById" mapped-by="usersByKodUser" target-entity="net.app.models2.Buyers"/>
+            <one-to-many name="userRolesById" mapped-by="usersByUserId" target-entity="net.app.models2.UserRoles"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Agencycosts">
+        <table name="agencycosts" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <id name="id"/>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="sum">
+                <column name="Sum" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.BalanceOfRepresentations">
+        <table name="balance of representations" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="наименование">
+                <column name="Наименование" nullable="false"/>
+            </basic>
+            <basic name="sumСумма">
+                <column name="Sum-Сумма" nullable="false" precision="32"/>
+            </basic>
+            <basic name="суммаУслуги">
+                <column name="сумма услуги" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyerscollections">
+        <table name="buyerscollections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="фио">
+                <column name="ФИО" nullable="false"/>
+            </basic>
+            <basic name="дисконт">
+                <column name="Дисконт" nullable="false"/>
+            </basic>
+            <basic name="пол">
+                <column name="Пол" nullable="false"/>
+            </basic>
+            <basic name="датаРождения">
+                <column name="Дата рождения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="адрессРегистрации">
+                <column name="Адресс регистрации" nullable="false"/>
+            </basic>
+            <basic name="суммаНакопленная">
+                <column name="Сумма накопленная" nullable="false" precision="11"/>
+            </basic>
+            <basic name="датаПолучения">
+                <column name="Дата получения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="наименование">
+                <column name="Наименование" nullable="false"/>
+            </basic>
+            <basic name="адресс">
+                <column name="Адресс" nullable="false"/>
+            </basic>
+            <basic name="телефон">
+                <column name="Телефон" nullable="false"/>
+            </basic>
+            <basic name="датаОснования">
+                <column name="Дата основания" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="номер">
+                <column name="Номер" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.IncomesOfRepresentativeOffices">
+        <table name="incomes of representative offices" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="наименование">
+                <column name="Наименование" nullable="false"/>
+            </basic>
+            <basic name="суммаУслуги">
+                <column name="сумма услуги" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Popularcollection">
+        <table name="popularcollection" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="названиеУслуги">
+                <column name="Название услуги" nullable="false"/>
+            </basic>
+            <basic name="countКод">
+                <column name="Count-Код" precision="21"/>
+            </basic>
+            <basic name="фио">
+                <column name="ФИО" nullable="false"/>
+            </basic>
+            <basic name="дисконт">
+                <column name="Дисконт" nullable="false"/>
+            </basic>
+            <basic name="пол">
+                <column name="Пол" nullable="false"/>
+            </basic>
+            <basic name="датаРождения">
+                <column name="Дата рождения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="адрессРегистрации">
+                <column name="Адресс регистрации" nullable="false"/>
+            </basic>
+            <basic name="суммаНакопленная">
+                <column name="Сумма накопленная" nullable="false" precision="11"/>
+            </basic>
+            <basic name="номер">
+                <column name="Номер" precision="11"/>
+            </basic>
+            <basic name="датаПоставки">
+                <column name="Дата поставки" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="датаПолучения">
+                <column name="Дата получения" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="описание">
+                <column name="Описание" nullable="false"/>
+            </basic>
+            <basic name="тип">
+                <column name="Тип" nullable="false" precision="11"/>
+            </basic>
+            <basic name="кодМагазина">
+                <column name="Код магазина" nullable="false" precision="11"/>
+            </basic>
+            <basic name="кодУслуги">
+                <column name="КодУслуги" nullable="false" precision="11"/>
+            </basic>
+            <basic name="наименование">
+                <column name="Наименование" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.PurchaseCosts">
+        <table name="purchase costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <basic name="servicesId">
+                <column name="services_id" precision="11"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="cardId">
+                <column name="card_id" precision="11"/>
+            </basic>
+            <basic name="idBuyer">
+                <column name="id_buyer" nullable="false" precision="11"/>
+            </basic>
+            <basic name="cardIdStore">
+                <column name="card_id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="idTypecosmetic">
+                <column name="id_typecosmetic" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idAgency">
+                <column name="id_agency" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.ReportProfitToCustomers">
+        <table name="report profit to customers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="фио">
+                <column name="ФИО" nullable="false"/>
+            </basic>
+            <basic name="суммаServices">
+                <column name="Сумма services" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.ServiceCard">
+        <table name="service_card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="кодКарточки">
+                <column name="Код карточки" nullable="false" precision="11"/>
+            </basic>
+            <basic name="названиеУслуги">
+                <column name="Название услуги" nullable="false"/>
+            </basic>
+            <basic name="ценаУслуги">
+                <column name="Цена услуги" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Turpogos">
+        <table name="turpogos" schema="cosmetics" catalog=""/>
+    </entity>
+    <entity class="net.app.models2.Agency">
+        <table name="agency" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone" nullable="false"/>
+            </basic>
+            <basic name="createDate">
+                <column name="create_date" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyers">
+        <table name="buyers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Card">
+        <table name="card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.CardService">
+        <table name="card_service" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <many-to-one name="cardByIdCard" optional="true" target-entity="net.app.models2.Card">
+                <join-column name="id_card" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Collections">
+        <table name="collections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <many-to-one name="agencyByIdAgency" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_agency" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Costs">
+        <table name="costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="summ">
+                <column name="summ" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.EmplPost">
+        <table name="empl_post" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <many-to-one name="costsByIdPost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_post" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdEmpl" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_empl" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Services">
+        <table name="services" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Store">
+        <table name="store" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.TypeCosmetic">
+        <table name="type_cosmetic" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="image">
+                <column name="image" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyers">
+        <table name="buyers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyers">
+        <table name="buyers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.UserRoles">
+        <table name="user_roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <many-to-one name="usersByUserId" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="user_id" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Users">
+        <table name="users" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="username">
+                <column name="username"/>
+            </basic>
+            <basic name="password">
+                <column name="password"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Agency">
+        <table name="agency" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone" nullable="false"/>
+            </basic>
+            <basic name="createDate">
+                <column name="create_date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="idCost">
+                <column name="id_cost" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="costsByIdCost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_cost" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="collectionsById" mapped-by="agencyByIdAgency"
+                         target-entity="net.app.models2.Collections"/>
+            <one-to-many name="emplPostsById" mapped-by="agencyByIdEmpl" target-entity="net.app.models2.EmplPost"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyers">
+        <table name="buyers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+            <basic name="kodUser">
+                <column name="kod_user" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="usersByKodUser" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="kod_user" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardsById" mapped-by="buyersByIdBuyer" target-entity="net.app.models2.Card"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Card">
+        <table name="card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idBuyer">
+                <column name="id_buyer" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="buyersByIdBuyer" optional="true" target-entity="net.app.models2.Buyers">
+                <join-column name="id_buyer" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="collectionsByIdStore" optional="true" target-entity="net.app.models2.Collections">
+                <join-column name="id_store" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardServicesById" mapped-by="cardByIdCard" target-entity="net.app.models2.CardService"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.CardService">
+        <table name="card_service" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idCard">
+                <column name="id_card" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="cardByIdCard" optional="true" target-entity="net.app.models2.Card">
+                <join-column name="id_card" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="servicesByIdService" optional="true" target-entity="net.app.models2.Services">
+                <join-column name="id_service" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Collections">
+        <table name="collections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="idTypecosmetic">
+                <column name="id_typecosmetic" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idAgency">
+                <column name="id_agency" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="typeCosmeticByIdTypecosmetic" optional="true"
+                         target-entity="net.app.models2.TypeCosmetic">
+                <join-column name="id_typecosmetic" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="storeByIdStore" optional="true" target-entity="net.app.models2.Store">
+                <join-column name="id_store" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdAgency" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_agency" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardsById" mapped-by="collectionsByIdStore" target-entity="net.app.models2.Card"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Costs">
+        <table name="costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="summ">
+                <column name="summ" nullable="false" precision="11"/>
+            </basic>
+            <one-to-many name="agenciesById" mapped-by="costsByIdCost" target-entity="net.app.models2.Agency"/>
+            <one-to-many name="emplPostsById" mapped-by="costsByIdPost" target-entity="net.app.models2.EmplPost"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.EmplPost">
+        <table name="empl_post" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idPost">
+                <column name="id_post" precision="11"/>
+            </basic>
+            <basic name="idEmpl">
+                <column name="id_empl" precision="11"/>
+            </basic>
+            <many-to-one name="costsByIdPost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_post" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdEmpl" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_empl" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Pictures">
+        <table name="pictures" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="image">
+                <column name="Image" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="Name" nullable="false" length="45"/>
+            </basic>
+            <basic name="count">
+                <column name="Count" nullable="false" precision="11"/>
+            </basic>
+            <basic name="description">
+                <column name="Description" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="10"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Roles">
+        <table name="roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="100"/>
+            </basic>
+            <one-to-many name="userRolesById" mapped-by="rolesByRoleId" target-entity="net.app.models2.UserRoles"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Services">
+        <table name="services" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <one-to-many name="cardServicesById" mapped-by="servicesByIdService"
+                         target-entity="net.app.models2.CardService"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Store">
+        <table name="store" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <one-to-many name="collectionsById" mapped-by="storeByIdStore" target-entity="net.app.models2.Collections"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.TypeCosmetic">
+        <table name="type_cosmetic" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="image">
+                <column name="image" nullable="false" precision="-1"/>
+            </basic>
+            <one-to-many name="collectionsById" mapped-by="typeCosmeticByIdTypecosmetic"
+                         target-entity="net.app.models2.Collections"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.UserRoles">
+        <table name="user_roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="userId">
+                <column name="user_id" precision="11"/>
+            </basic>
+            <basic name="roleId">
+                <column name="role_id" precision="11"/>
+            </basic>
+            <many-to-one name="usersByUserId" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="user_id" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="rolesByRoleId" optional="true" target-entity="net.app.models2.Roles">
+                <join-column name="role_id" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Users">
+        <table name="users" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="username">
+                <column name="username"/>
+            </basic>
+            <basic name="password">
+                <column name="password"/>
+            </basic>
+            <one-to-many name="buyersById" mapped-by="usersByKodUser" target-entity="net.app.models2.Buyers"/>
+            <one-to-many name="userRolesById" mapped-by="usersByUserId" target-entity="net.app.models2.UserRoles"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Agencycosts">
+        <table name="agencycosts" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="sum">
+                <column name="Sum" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Agency">
+        <table name="agency" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone" nullable="false"/>
+            </basic>
+            <basic name="createDate">
+                <column name="create_date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="idCost">
+                <column name="id_cost" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="costsByIdCost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_cost" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="collectionsById" mapped-by="agencyByIdAgency"
+                         target-entity="net.app.models2.Collections"/>
+            <one-to-many name="emplPostsById" mapped-by="agencyByIdEmpl" target-entity="net.app.models2.EmplPost"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Buyers">
+        <table name="buyers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+            <basic name="kodUser">
+                <column name="kod_user" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="usersByKodUser" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="kod_user" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardsById" mapped-by="buyersByIdBuyer" target-entity="net.app.models2.Card"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Card">
+        <table name="card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idBuyer">
+                <column name="id_buyer" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="buyersByIdBuyer" optional="true" target-entity="net.app.models2.Buyers">
+                <join-column name="id_buyer" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="collectionsByIdStore" optional="true" target-entity="net.app.models2.Collections">
+                <join-column name="id_store" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardServicesById" mapped-by="cardByIdCard" target-entity="net.app.models2.CardService"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.CardService">
+        <table name="card_service" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idCard">
+                <column name="id_card" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="cardByIdCard" optional="true" target-entity="net.app.models2.Card">
+                <join-column name="id_card" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="servicesByIdService" optional="true" target-entity="net.app.models2.Services">
+                <join-column name="id_service" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Collections">
+        <table name="collections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="idTypecosmetic">
+                <column name="id_typecosmetic" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idAgency">
+                <column name="id_agency" nullable="false" precision="11"/>
+            </basic>
+            <many-to-one name="typeCosmeticByIdTypecosmetic" optional="true"
+                         target-entity="net.app.models2.TypeCosmetic">
+                <join-column name="id_typecosmetic" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="storeByIdStore" optional="true" target-entity="net.app.models2.Store">
+                <join-column name="id_store" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdAgency" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_agency" nullable="false" referenced-column-name="id"/>
+            </many-to-one>
+            <one-to-many name="cardsById" mapped-by="collectionsByIdStore" target-entity="net.app.models2.Card"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Costs">
+        <table name="costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="summ">
+                <column name="summ" nullable="false" precision="11"/>
+            </basic>
+            <one-to-many name="agenciesById" mapped-by="costsByIdCost" target-entity="net.app.models2.Agency"/>
+            <one-to-many name="emplPostsById" mapped-by="costsByIdPost" target-entity="net.app.models2.EmplPost"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.EmplPost">
+        <table name="empl_post" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="idPost">
+                <column name="id_post" precision="11"/>
+            </basic>
+            <basic name="idEmpl">
+                <column name="id_empl" precision="11"/>
+            </basic>
+            <many-to-one name="costsByIdPost" optional="true" target-entity="net.app.models2.Costs">
+                <join-column name="id_post" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="agencyByIdEmpl" optional="true" target-entity="net.app.models2.Agency">
+                <join-column name="id_empl" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Pictures">
+        <table name="pictures" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="image">
+                <column name="Image" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="Name" nullable="false" length="45"/>
+            </basic>
+            <basic name="count">
+                <column name="Count" nullable="false" precision="11"/>
+            </basic>
+            <basic name="description">
+                <column name="Description" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="10"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Roles">
+        <table name="roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="100"/>
+            </basic>
+            <one-to-many name="userRolesById" mapped-by="rolesByRoleId" target-entity="net.app.models2.UserRoles"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Services">
+        <table name="services" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <one-to-many name="cardServicesById" mapped-by="servicesByIdService"
+                         target-entity="net.app.models2.CardService"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Store">
+        <table name="store" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <one-to-many name="collectionsById" mapped-by="storeByIdStore" target-entity="net.app.models2.Collections"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.TypeCosmetic">
+        <table name="type_cosmetic" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="image">
+                <column name="image" nullable="false" precision="-1"/>
+            </basic>
+            <one-to-many name="collectionsById" mapped-by="typeCosmeticByIdTypecosmetic"
+                         target-entity="net.app.models2.Collections"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.UserRoles">
+        <table name="user_roles" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="userId">
+                <column name="user_id" precision="11"/>
+            </basic>
+            <basic name="roleId">
+                <column name="role_id" precision="11"/>
+            </basic>
+            <many-to-one name="usersByUserId" optional="true" target-entity="net.app.models2.Users">
+                <join-column name="user_id" referenced-column-name="id"/>
+            </many-to-one>
+            <many-to-one name="rolesByRoleId" optional="true" target-entity="net.app.models2.Roles">
+                <join-column name="role_id" referenced-column-name="id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="net.app.models2.Users">
+        <table name="users" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="username">
+                <column name="username"/>
+            </basic>
+            <basic name="password">
+                <column name="password"/>
+            </basic>
+            <one-to-many name="buyersById" mapped-by="usersByKodUser" target-entity="net.app.models2.Buyers"/>
+            <one-to-many name="userRolesById" mapped-by="usersByUserId" target-entity="net.app.models2.UserRoles"/>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.Agencycosts">
+        <table name="agencycosts" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="sum">
+                <column name="Sum" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.BalanceOfRepresentations">
+        <table name="balance of representations" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="sum">
+                <column name="Sum" nullable="false" precision="32"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.Buyerscollections">
+        <table name="buyerscollections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr2">
+                <column name="addr2" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone" nullable="false"/>
+            </basic>
+            <basic name="createDate">
+                <column name="create_date" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="id">
+                <column name="id" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.IncomesOfRepresentativeOffices">
+        <table name="incomes of representative offices" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.Popularcollection">
+        <table name="popularcollection" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="nameService">
+                <column name="name-service" nullable="false"/>
+            </basic>
+            <basic name="countId">
+                <column name="Count-id" precision="21"/>
+            </basic>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="discount">
+                <column name="discount" nullable="false"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex" nullable="false"/>
+            </basic>
+            <basic name="dateBirth">
+                <column name="date_birth" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="addr">
+                <column name="addr" nullable="false"/>
+            </basic>
+            <basic name="summDiscount">
+                <column name="summ_discount" nullable="false" precision="11"/>
+            </basic>
+            <basic name="id">
+                <column name="id" precision="11"/>
+            </basic>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="idTypecosmetic">
+                <column name="id_typecosmetic" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idAgency">
+                <column name="id_agency" nullable="false" precision="11"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.PurchaseCosts">
+        <table name="purchase costs" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <id name="id"/>
+            <basic name="servicesId">
+                <column name="services_id" precision="11"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+            <basic name="cardId">
+                <column name="card_id" precision="11"/>
+            </basic>
+            <basic name="idBuyer">
+                <column name="id_buyer" nullable="false" precision="11"/>
+            </basic>
+            <basic name="cardIdStore">
+                <column name="card_id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idService">
+                <column name="id_service" nullable="false" precision="11"/>
+            </basic>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="idTypecosmetic">
+                <column name="id_typecosmetic" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idStore">
+                <column name="id_store" nullable="false" precision="11"/>
+            </basic>
+            <basic name="idAgency">
+                <column name="id_agency" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.ReportProfitToCustomers">
+        <table name="report profit to customers" schema="cosmetics" catalog=""/>
+        <attributes>
+            <basic name="fio">
+                <column name="FIO" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="32"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.views.ServiceCard">
+        <table name="service_card" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id"/>
+            <basic name="idCard">
+                <column name="id_card" nullable="false" precision="11"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" nullable="false" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="net.app.models.Collections">
+        <table name="collections" schema="cosmetics" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="datePost">
+                <column name="date_post" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="dateGet">
+                <column name="date_get" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="image">
+                <column name="image" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

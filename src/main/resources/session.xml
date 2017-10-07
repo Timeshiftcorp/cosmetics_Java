@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/cosmetics</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping resource="jpaMap.xml"/>
+        <mapping class="net.app.models2.Agency"/>
+        <mapping class="net.app.models2.Buyers"/>
+        <mapping class="net.app.models2.Card"/>
+        <mapping class="net.app.models2.CardService"/>
+        <mapping class="net.app.models2.Collections"/>
+        <mapping class="net.app.models2.Costs"/>
+        <mapping class="net.app.models2.EmplPost"/>
+        <mapping class="net.app.models2.Pictures"/>
+        <mapping class="net.app.models2.Roles"/>
+        <mapping class="net.app.models2.Services"/>
+        <mapping class="net.app.models2.Store"/>
+        <mapping class="net.app.models.TypeCosmetic"/>
+        <mapping class="net.app.models2.UserRoles"/>
+        <mapping class="net.app.models2.Users"/>
+        <mapping class="net.app.models2.Agencycosts"/>
+        <mapping class="net.app.models2.BalanceOfRepresentations"/>
+        <mapping class="net.app.models2.Buyerscollections"/>
+        <mapping class="net.app.models2.IncomesOfRepresentativeOffices"/>
+        <mapping class="net.app.models2.Popularcollection"/>
+        <mapping class="net.app.models2.PurchaseCosts"/>
+        <mapping class="net.app.models2.ReportProfitToCustomers"/>
+        <mapping class="net.app.models2.ServiceCard"/>
+        <mapping class="net.app.models2.Turpogos"/>
+        <mapping class="net.app.models2.TypeCosmetic"/>
+        <mapping class="net.app.models.views.Agencycosts"/>
+        <mapping resource="net/app/models/views/Agencycosts.hbm.xml"/>
+        <mapping class="net.app.models.views.BalanceOfRepresentations"/>
+        <mapping resource="net/app/models/views/BalanceOfRepresentations.hbm.xml"/>
+        <mapping resource="net/app/models/views/Buyerscollections.hbm.xml"/>
+        <mapping class="net.app.models.views.Buyerscollections"/>
+        <mapping resource="net/app/models/views/IncomesOfRepresentativeOffices.hbm.xml"/>
+        <mapping class="net.app.models.views.IncomesOfRepresentativeOffices"/>
+        <mapping resource="net/app/models/views/Popularcollection.hbm.xml"/>
+        <mapping class="net.app.models.views.Popularcollection"/>
+        <mapping class="net.app.models.views.PurchaseCosts"/>
+        <mapping resource="net/app/models/views/PurchaseCosts.hbm.xml"/>
+        <mapping resource="net/app/models/views/ReportProfitToCustomers.hbm.xml"/>
+        <mapping class="net.app.models.views.ReportProfitToCustomers"/>
+        <mapping resource="net/app/models/views/ServiceCard.hbm.xml"/>
+        <mapping class="net.app.models.views.ServiceCard"/>
+        <mapping class="net.app.models.Collections"/>
+    </session-factory>
+</hibernate-configuration>
